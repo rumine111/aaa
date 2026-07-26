@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Webtoon Seamless Join</title>
+    <style>
+      :root {
+        --bg: #000;
+        --page-width: clamp(320px, 92vw, 760px);
+        --page-padding: clamp(0px, 1.8vw, 14px);
+        --overlap: 1px;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+      }
+
+      body {
+        overflow-x: hidden;
+      }
+
+      .comic-shell {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        box-sizing: border-box;
+        padding: 0;
+      }
+
+      .comic-page {
+        width: min(100%, var(--page-width));
+        margin: 0 auto;
+        padding: 0 var(--page-padding);
+        box-sizing: border-box;
+        line-height: 0;
+        font-size: 0;
+        background: #fff;
+      }
+
+      .panel {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        vertical-align: top;
+        user-select: none;
+        -webkit-user-drag: none;
+        image-rendering: auto;
+      }
+
+      /* 경계가 보이면 1~3px 정도만 조절 */
+      .panel.bottom {
+        margin-top: calc(var(--overlap) * -1);
+      }
+
+      /* 아주 좁은 화면에서는 패딩을 더 줄여서 이미지가 덜 작아지게 */
+      @media (max-width: 420px) {
+        :root {
+          --page-padding: 0px;
+          --page-width: 100vw;
+        }
+      }
+
+      /* 큰 화면에서는 너무 넓게 퍼지지 않도록 여백을 조금 더 줌 */
+      @media (min-width: 1200px) {
+        :root {
+          --page-width: 720px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="comic-shell">
+      <section class="comic-page" aria-label="webtoon images">
+        <img
+          class="panel top"
+          src="https://pub-361887c201474be4910b7eba9102b585.r2.dev/2308.jpg"
+          alt="웹툰 이미지 1"
+        />
+        <img
+          class="panel bottom"
+          src="https://pub-361887c201474be4910b7eba9102b585.r2.dev/2309.jpg"
+          alt="웹툰 이미지 2"
+        />
+      </section>
+    </main>
+  </body>
+</html>
